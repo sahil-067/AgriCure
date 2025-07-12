@@ -73,17 +73,6 @@ Augmented dataset: 2,432 images
 
 ---
 
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sumit-kumar-2104/plant_app_1.git
-   ```
-2. Install dependencies as specified in the `requirements.txt` file.
-3. Build the Web application using the provided source code.
-
----
-
 ## Usage
 
 1. Launch the application on your device.
@@ -99,14 +88,6 @@ Augmented dataset: 2,432 images
 We welcome contributions! Please create a pull request or open an issue for any suggestions or bug reports.
 
 ---
-
-## Contact
-
-For queries, reach out to the developers:
-- Sumit Kumar: sumitkumar59378@gmail.com / nehra59378@gmail.com
-
----
-
 
 ## License
 
