@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+    <!-- <link rel="stylesheet" href="../static/css/info.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+
+    <style>
+        /* Container for background image */
+        .background-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url("{{ url_for('static', filename='images/nursery.jpg') }}");
+          background-size: cover;
+          background-position: center;
+          z-index: -2;
+          filter: blur(10px); /* Apply blur effect */
+        }
+    
+        /* Apply an overlay to darken the background slightly */
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent overlay */
+          z-index: -1;
+        }
+      </style>
+
+</head>
+<body>
+
+    <!-- Background image container -->
+    <div class="background-container"></div>
+    <div class="overlay"></div>
+
+    <nav>
+        <div class="nav-left">
+          <a href="{{ url_for('home') }}" style="color: white; text-decoration: none;">Plant Cure</a>
+        </div>
+        <div class="nav-right">
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+          {% endif %}
+        </div>
+      </nav>
+
+    <h1>Detailed Information on {{ predicted_class }}</h1>
+
+    <div class="card-container">
+        <!-- Bitter Gourd Conditions -->
+        {% if plant == "bittergourd" %}
+            {% if predicted_class == "healthy" %}
+            <div class="card">
+                <h2>Healthy Bitter Gourd</h2>
+                <p>The plant is healthy and showing no symptoms of disease or nutrient deficiency.</p>
+                <div class="severity">Severity: <span class="none">&#10004;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> N/A
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> N/A
+                </div>
+            </div>
+            {% elif predicted_class == "DM" %}
+            <div class="card">
+                <h2>Downy Mildew (DM)</h2>
+                <p>A fungal disease causing yellow spots on leaves that turn brown. Affects photosynthesis and reduces yield.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> High humidity, cool temperatures.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use fungicides, improve air circulation, avoid overhead watering.
+                </div>
+            </div>
+            {% elif predicted_class == "LS" %}
+            <div class="card">
+                <h2>Leaf Spot (LS)</h2>
+                <p>This disease causes dark, circular spots on leaves, leading to premature leaf drop and stunted growth.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Fungal infection, wet and humid conditions.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply fungicides, remove affected leaves, ensure proper spacing for air circulation.
+                </div>
+            </div>
+            {% elif predicted_class == "JAS" %}
+            <div class="card">
+                <h2>Jassid (JAS)</h2>
+                <p>A small insect that feeds on plant sap, causing yellowing of leaves and reduced growth. Severe infestation can cause leaf curling.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Infestation by jassids.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use insecticides, introduce natural predators, maintain clean cultivation practices.
+                </div>
+            </div>
+            {% elif predicted_class == "K" %}
+            <div class="card">
+                <h2>Potassium Deficiency (K)</h2>
+                <p>Browning of leaf edges, weak stems, and poor fruit development are symptoms of potassium deficiency.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Low potassium levels in soil.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply potassium fertilizers, use potassium-rich compost.
+                </div>
+            </div>
+            {% elif predicted_class == "K_Mg" %}
+            <div class="card">
+                <h2>Potassium and Magnesium Deficiency (K Mg)</h2>
+                <p>Yellowing between leaf veins in older leaves and poor plant vigor. Both nutrients are essential for energy production.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Deficiency in potassium and magnesium.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use fertilizers rich in potassium and magnesium, ensure balanced soil pH.
+                </div>
+            </div>
+            {% elif predicted_class == "N" %}
+            <div class="card">
+                <h2>Nitrogen Deficiency (N)</h2>
+                <p>Pale, yellow leaves and slow growth indicate nitrogen deficiency. Stems may be small and weak.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Low nitrogen levels in soil.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply nitrogen-rich fertilizers, use organic composts.
+                </div>
+            </div>
+            {% elif predicted_class == "N_K" %}
+            <div class="card">
+                <h2>Nitrogen and Potassium Deficiency (N K)</h2>
+                <p>Yellowing leaves, poor plant growth, and weak fruit development due to combined nitrogen and potassium deficiencies.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Deficiency in nitrogen and potassium.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use balanced fertilizers, ensure proper soil management.
+                </div>
+            </div>
+            {% elif predicted_class == "N_Mg" %}
+            <div class="card">
+                <h2>Nitrogen and Magnesium Deficiency (N Mg)</h2>
+                <p>Yellowing between leaf veins and stunted growth, especially in older leaves, are signs of this combined deficiency.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Deficiency in nitrogen and magnesium.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use fertilizers with nitrogen and magnesium, improve soil health.
+                </div>
+            </div>
+            {% endif %}
+
+        <!-- Tomato Conditions -->
+        {% elif plant == "tomato" %}
+            {% if predicted_class == "healthy" %}
+            <div class="card">
+                <h2>Healthy Tomato</h2>
+                <p>The tomato plant is in good health with no visible symptoms of diseases or nutrient deficiencies.</p>
+                <div class="severity">Severity: <span class="none">&#10004;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> N/A
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> N/A
+                </div>
+            </div>
+            {% elif predicted_class == "LM" %}
+            <div class="card">
+                <h2>Leaf Miner (LM)</h2>
+                <p>Leaf miners burrow into leaves, causing winding tunnels that reduce the plant's ability to photosynthesize.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Infestation by leaf miner larvae.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Remove affected leaves, use insecticidal soaps, and introduce natural predators.
+                </div>
+            </div>
+            {% elif predicted_class == "MIT" %}
+            <div class="card">
+                <h2>Mite (MIT)</h2>
+                <p>Mites feed on the plant's leaves, causing them to turn yellow or bronze, leading to reduced plant health.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Infestation by mites.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply miticides, improve plant hygiene, introduce predatory mites.
+                </div>
+            </div>
+            {% elif predicted_class == "JAS_MIT" %}
+            <div class="card">
+                <h2>Jassid and Mite (JAS MIT)</h2>
+                <p>A combined attack from jassids and mites leads to leaf curling, yellowing, and stunted growth.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Infestation by jassids and mites.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use combined pest management strategies, apply insecticides, introduce natural predators.
+                </div>
+            </div>
+            {% elif predicted_class == "K" %}
+            <div class="card">
+                <h2>Potassium Deficiency (K)</h2>
+                <p>Potassium deficiency causes leaf edge browning, weak stems, and poor fruit quality and size.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Low potassium levels in soil.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply potassium fertilizers, use potassium-rich compost.
+                </div>
+            </div>
+            {% elif predicted_class == "N" %}
+            <div class="card">
+                <h2>Nitrogen Deficiency (N)</h2>
+                <p>Yellow leaves and weak growth indicate nitrogen deficiency, with older leaves turning pale.</p>
+                <div class="severity">Severity: <span class="moderate">&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Low nitrogen levels in soil.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Apply nitrogen-rich fertilizers, use organic composts.
+                </div>
+            </div>
+            {% elif predicted_class == "N_K" %}
+            <div class="card">
+                <h2>Nitrogen and Potassium Deficiency (N K)</h2>
+                <p>Symptoms include yellowing leaves, weak stems, and small, poorly developed fruit.</p>
+                <div class="severity">Severity: <span class="severe">&#9888;&#9888;&#9888;</span></div>
+                <div class="causes">
+                    <strong>Causes:</strong> Deficiency in nitrogen and potassium.
+                </div>
+                <div class="remedies">
+                    <strong>Remedies:</strong> Use balanced fertilizers, ensure proper soil management.
+                </div>
+            </div>
+            {% endif %}
+        {% else %}
+            <p>No detailed information available for this condition.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
