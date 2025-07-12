@@ -107,11 +107,6 @@ For queries, reach out to the developers:
 
 ---
 
-## Acknowledgments
-
-- **Research Paper:** This application is based on the research "AgriCure: A web application based layered augmentation-enhanced YOLOv8 for disease and nutrient deficiency detection in bitter gourd leaves"
-
----
 
 ## License
 
